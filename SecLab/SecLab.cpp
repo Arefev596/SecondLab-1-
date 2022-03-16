@@ -1,7 +1,7 @@
 ﻿#include "stdio.h"
-#include <iostream>
+#include "locale.h"
+#pragma warning(disable : 4996)
 
-using namespace std;
 
 struct DList
 {
@@ -18,10 +18,15 @@ void Init(DList* el)
 	DList* temp2 = new DList;
 
 	printf("Введите размер двусвязного списка: ");
-	scanf("%i",&size);
+	scanf("%i", &size);
+	while (size < 0) {
+		printf("Введите число большее 0!\n");
+		scanf("%i", &size);
+	}
+
 
 	printf("Введите значение головы: ");
-	scanf("%i",&el->value);
+	scanf("%i", &el->value);
 	el->next = temp;
 	temp->prev = el;
 
@@ -30,7 +35,7 @@ void Init(DList* el)
 		printf("Введите %i", i);
 		printf(" элемент: ");
 		int help;
-		scanf("%i",&help);
+		scanf("%i", &help);
 		temp->value = help;
 		temp2 = new DList;
 		temp->next = temp2;
@@ -40,13 +45,13 @@ void Init(DList* el)
 	}
 
 }
- 
+
 void print(DList* el)
 {
 	DList* temp = el;
 	while (temp->next != NULL)
 	{
-		printf("%i",temp->value);
+		printf("%i", temp->value);
 		printf(" ");
 		temp = temp->next;
 	}
@@ -115,10 +120,11 @@ int main()
 	printf("Список в убывающем порядке\n");
 	while (NewDList != NULL)
 	{
-		printf("%i",NewDList->value);
+		printf("%i", NewDList->value);
 		printf(" ");
 		NewDList = NewDList->prev;
 	}
 
 	return 0;
+
 }
